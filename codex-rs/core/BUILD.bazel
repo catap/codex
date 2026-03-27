@@ -20,6 +20,7 @@ filegroup(
 codex_rust_crate(
     name = "core",
     crate_name = "codex_core",
+    crate_features = ["code-mode"],
     compile_data = glob(
         include = ["**"],
         exclude = [

@@ -2886,6 +2886,7 @@ fn test_get_openai_tools_mcp_tools_with_additional_properties_schema() {
     );
 }
 
+#[cfg(feature = "code-mode")]
 #[test]
 fn code_mode_augments_builtin_tool_descriptions_with_typed_sample() {
     let config = test_config();
@@ -2917,6 +2918,7 @@ fn code_mode_augments_builtin_tool_descriptions_with_typed_sample() {
     );
 }
 
+#[cfg(feature = "code-mode")]
 #[test]
 fn code_mode_augments_mcp_tool_descriptions_with_namespaced_sample() {
     let config = test_config();
@@ -2969,6 +2971,7 @@ fn code_mode_augments_mcp_tool_descriptions_with_namespaced_sample() {
     );
 }
 
+#[cfg(feature = "code-mode")]
 #[test]
 fn code_mode_only_restricts_model_tools_to_exec_tools() {
     let mut features = Features::with_defaults();
@@ -2983,6 +2986,7 @@ fn code_mode_only_restricts_model_tools_to_exec_tools() {
     );
 }
 
+#[cfg(feature = "code-mode")]
 #[test]
 fn code_mode_only_exec_description_includes_full_nested_tool_details() {
     let config = test_config();
@@ -3016,6 +3020,7 @@ fn code_mode_only_exec_description_includes_full_nested_tool_details() {
     assert!(description.contains("### `view_image` (`view_image`)"));
 }
 
+#[cfg(feature = "code-mode")]
 #[test]
 fn code_mode_exec_description_omits_nested_tool_details_when_not_code_mode_only() {
     let config = test_config();

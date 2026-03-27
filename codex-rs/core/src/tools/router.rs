@@ -63,16 +63,26 @@ impl ToolRouter {
         );
         let (specs, registry) = builder.build();
         let model_visible_specs = if config.code_mode_only_enabled {
-            specs
-                .iter()
-                .filter_map(|configured_tool| {
-                    if !codex_code_mode::is_code_mode_nested_tool(configured_tool.spec.name()) {
-                        Some(configured_tool.spec.clone())
-                    } else {
-                        None
-                    }
-                })
-                .collect()
+            #[cfg(feature = "code-mode")]
+            {
+                specs
+                    .iter()
+                    .filter_map(|configured_tool| {
+                        if !codex_code_mode::is_code_mode_nested_tool(configured_tool.spec.name()) {
+                            Some(configured_tool.spec.clone())
+                        } else {
+                            None
+                        }
+                    })
+                    .collect()
+            }
+            #[cfg(not(feature = "code-mode"))]
+            {
+                specs
+                    .iter()
+                    .map(|configured_tool| configured_tool.spec.clone())
+                    .collect()
+            }
         } else {
             specs
                 .iter()
